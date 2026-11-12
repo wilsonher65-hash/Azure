@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculadora de Interés Simple</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: linear-gradient(135deg, #0078d4, #50a0e6);
+      padding: 16px;
+    }
+    .card {
+      background: #fff;
+      width: 100%;
+      max-width: 420px;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    }
+    h1 { margin: 0 0 4px; font-size: 1.5rem; color: #0078d4; }
+    .formula { margin: 0 0 20px; color: #555; font-size: 0.95rem; }
+    label { display: block; margin: 12px 0 4px; font-weight: 600; color: #333; }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .fila { display: flex; gap: 8px; }
+    .fila input { flex: 2; }
+    .fila select { flex: 1; }
+    button {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      color: #fff;
+      background: #0078d4;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    button:hover { background: #005a9e; }
+    .resultado {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f0f6fc;
+      border-left: 4px solid #0078d4;
+      border-radius: 6px;
+      display: none;
+    }
+    .resultado p { margin: 6px 0; }
+    .error { color: #c00; margin-top: 12px; display: none; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Interés Simple</h1>
+    <p class="formula">Fórmula: <strong>I = C × i × t</strong> &nbsp;|&nbsp; <strong>M = C + I</strong></p>
+
+    <label for="capital">Capital inicial (C)</label>
+    <input type="number" id="capital" placeholder="Ej: 1000" min="0" step="any">
+
+    <label for="tasa">Tasa de interés anual (%)</label>
+    <input type="number" id="tasa" placeholder="Ej: 5" min="0" step="any">
+
+    <label for="tiempo">Tiempo (t)</label>
+    <div class="fila">
+      <input type="number" id="tiempo" placeholder="Ej: 3" min="0" step="any">
+      <select id="unidad">
+        <option value="anios">Años</option>
+        <option value="meses">Meses</option>
+        <option value="dias">Días</option>
+      </select>
+    </div>
+
+    <button onclick="calcular()">Calcular</button>
+
+    <p class="error" id="error">Por favor, ingresa valores válidos en todos los campos.</p>
+
+    <div class="resultado" id="resultado">
+      <p>Interés generado (I): <strong id="interes"></strong></p>
+      <p>Monto final (M): <strong id="monto"></strong></p>
+    </div>
+  </div>
+
+  <script>
+    function calcular() {
+      const C = parseFloat(document.getElementById("capital").value);
+      const tasa = parseFloat(document.getElementById("tasa").value);
+      let t = parseFloat(document.getElementById("tiempo").value);
+      const unidad = document.getElementById("unidad").value;
+
+      const error = document.getElementById("error");
+      const resultado = document.getElementById("resultado");
+
+      if (isNaN(C) || isNaN(tasa) || isNaN(t) || C < 0 || tasa < 0 || t < 0) {
+        error.style.display = "block";
+        resultado.style.display = "none";
+        return;
+      }
+      error.style.display = "none";
+
+      // Convertir el tiempo a años
+      if (unidad === "meses") t = t / 12;
+      if (unidad === "dias") t = t / 360;
+
+      const i = tasa / 100;
+      const I = C * i * t;
+      const M = C + I;
+
+      const formato = n => n.toLocaleString("es", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById("interes").textContent = "$" + formato(I);
+      document.getElementById("monto").textContent = "$" + formato(M);
+      resultado.style.display = "block";
+    }
+  </script>
+</body>
+</html>

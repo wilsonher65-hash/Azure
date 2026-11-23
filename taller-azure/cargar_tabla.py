@@ -1,4 +1,5 @@
 """Punto 4: carga datos a la tabla `sensores` de Azure Table Storage."""
+import subprocess
 from datetime import datetime, timezone
 from getpass import getpass
 
@@ -20,9 +21,21 @@ def crear_entidad(numero, lectura):
     }
 
 
+def leer_portapapeles():
+    """Lee la cadena copiada; no la muestra ni la guarda en ningun archivo."""
+    resultado = subprocess.run(
+        ["powershell.exe", "-NoProfile", "-Command", "Get-Clipboard"],
+        capture_output=True, text=True, check=True,
+    )
+    return resultado.stdout.strip()
+
+
 def main():
-    # getpass no muestra lo que pegas ni lo guarda en ningun archivo
-    conexion = getpass("Pega tu connection string (no se ve) y Enter: ").strip()
+    # getpass oculta lo que se escriba o pegue aqui por error
+    getpass("Copia la cadena de conexion en el portal, vuelve aqui y presiona Enter: ")
+    conexion = leer_portapapeles()
+    if not (conexion.startswith("DefaultEndpointsProtocol=") and "AccountKey=" in conexion):
+        raise SystemExit("Lo copiado no es la cadena de conexion. Copiala de key1 y vuelve a correr esto.")
     servicio = TableServiceClient.from_connection_string(conexion)
     tabla = servicio.create_table_if_not_exists("sensores")
 

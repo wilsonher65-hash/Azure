@@ -25,6 +25,8 @@ az cosmosdb create --name redsocial-taller2026 --resource-group rg-redsocial \
   --enable-free-tier true
 ```
 
+![Cuenta de Cosmos DB creada](capturas/punto1-cuenta-cosmosdb.png)
+
 ## 2 y 3. Base de datos RedSocial y contenedor Mensajes
 
 Creados también desde Cloud Shell:
@@ -46,6 +48,8 @@ En el portal se ven en **Data Explorer**:
 | Container id | `Mensajes` |
 | Partition key | `/idUsuario` |
 | Rendimiento | 400 RU/s (dentro del nivel Gratis) |
+
+![Base RedSocial y contenedor Mensajes en Data Explorer](capturas/punto2-3-base-y-contenedor.png)
 
 > El script `redsocial.py` también los crea solo si no existen
 > (`create_database_if_not_exists` y `create_container_if_not_exists`).
@@ -74,6 +78,11 @@ Cada mensaje es un documento JSON:
 
 La fecha va en **ISO 8601** (`AAAA-MM-DDTHH:MM:SSZ`) porque así se puede
 ordenar y comparar como texto: el orden alfabético coincide con el orden en el tiempo.
+
+Así se ven los mensajes guardados en el contenedor (Data Explorer → Mensajes → Items).
+Cosmos agrega sus propios campos internos (`_rid`, `_self`, `_etag`, `_ts`):
+
+![Lista de mensajes y JSON de msg-001](capturas/punto4-mensajes-y-json.png)
 
 ## 5. Agregar y consultar mensajes con Python
 
@@ -115,6 +124,11 @@ python redsocial.py
 
 Las consultas usan **parámetros** (`@usuario`, `@desde`...) en vez de pegar
 el texto a mano, lo que evita errores y ataques de inyección.
+
+### Resultado de la ejecución
+Salida real contra Azure (texto completo en `resultados_ejecucion.txt`):
+
+![Salida de redsocial.py](capturas/punto5-salida-python.png)
 
 ## 6. ¿Qué es el formato JSON y por qué es tan útil?
 

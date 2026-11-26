@@ -5,27 +5,47 @@ con el contenedor **Mensajes**, y usar **Python** para agregar y consultar mensa
 
 ## 1. Crear la instancia NoSQL de Cosmos DB (portal de Azure)
 
-1. Entra a <https://portal.azure.com> con tu cuenta de Microsoft Azure
-   (si eres estudiante, **Azure for Students** da crédito gratis sin tarjeta).
-2. **Crear un recurso** → busca **Azure Cosmos DB** → **Crear**.
-3. Escoge **Azure Cosmos DB for NoSQL**.
-4. Llena los datos:
-   - **Suscripción**: la tuya (por ejemplo, Azure for Students).
-   - **Grupo de recursos**: **Crear nuevo** → `rg-redsocial`.
-   - **Nombre de la cuenta**: uno único, en minúsculas (ej. `redsocial-tunombre`).
-   - **Ubicación**: la más cercana (ej. *East US* o *Brazil South*).
-   - **Modo de capacidad**: **Sin servidor (Serverless)**, que es lo más barato para pruebas.
-5. **Revisar y crear** → **Crear**. Tarda unos minutos.
+Cuenta usada: **Azure for Students**. Recurso creado: **`redsocial-taller2026`**
+(Azure Cosmos DB for NoSQL, región **Brazil South**, con el **nivel Gratis**:
+1000 RU/s y 25 GB sin costo).
+
+**Desde el portal** (<https://portal.azure.com>): **Crear un recurso** →
+**Azure Cosmos DB** → **Azure Cosmos DB for NoSQL** → grupo de recursos
+`rg-redsocial`, nombre de cuenta único, **Aplicar descuento del nivel Gratis**
+→ **Revisar y crear**.
+
+> **Problema encontrado:** con Azure for Students, la lista de ubicaciones del
+> formulario solo mostraba regiones *EUAP* (de prueba), y la validación las
+> rechazó porque Cosmos DB no está disponible ahí. Por eso la cuenta se creó con
+> **Azure Cloud Shell** (la terminal del portal), donde sí se puede elegir la región:
+
+```bash
+az cosmosdb create --name redsocial-taller2026 --resource-group rg-redsocial \
+  --locations regionName=brazilsouth failoverPriority=0 isZoneRedundant=False \
+  --enable-free-tier true
+```
 
 ## 2 y 3. Base de datos RedSocial y contenedor Mensajes
 
-En la cuenta creada → **Data Explorer** → **New Container**:
+Creados también desde Cloud Shell:
+
+```bash
+az cosmosdb sql database create --account-name redsocial-taller2026 \
+  --resource-group rg-redsocial --name RedSocial
+
+az cosmosdb sql container create --account-name redsocial-taller2026 \
+  --resource-group rg-redsocial --database-name RedSocial --name Mensajes \
+  --partition-key-path /idUsuario --throughput 400
+```
+
+En el portal se ven en **Data Explorer**:
 
 | Campo | Valor |
 |---|---|
-| Database id | **Create new** → `RedSocial` |
+| Database id | `RedSocial` |
 | Container id | `Mensajes` |
 | Partition key | `/idUsuario` |
+| Rendimiento | 400 RU/s (dentro del nivel Gratis) |
 
 > El script `redsocial.py` también los crea solo si no existen
 > (`create_database_if_not_exists` y `create_container_if_not_exists`).
@@ -63,7 +83,9 @@ En el portal → tu cuenta de Cosmos DB → **Configuración → Claves**, copia
 - **CLAVE PRINCIPAL** → variable `COSMOS_KEY`
 
 > ⚠️ La clave es secreta: **no la pongas en el código ni la subas a GitHub**.
-> Si no defines las variables, el programa te las pide al arrancar.
+> Opciones: variable `COSMOS_KEY`, pegarla en un archivo `clave.txt` junto al
+> script (está en `.gitignore`), o escribirla cuando el programa la pida.
+> El programa revisa que la clave tenga el formato correcto antes de conectarse.
 
 ### Ejecutar (Windows, PowerShell)
 

@@ -6,10 +6,11 @@ from azure.core.exceptions import ResourceExistsError
 from azure.storage.fileshare import ShareClient
 
 CARPETA_LOCAL = Path(__file__).resolve().parent / "archivos"
+# Mismos nombres de carpeta que se ven en el portal (Fotos, Videos, Documentos)
 TIPOS = {
-    "fotos": {".jpg", ".jpeg", ".png", ".gif", ".webp", ".heic"},
-    "videos": {".mp4", ".mov", ".avi", ".mkv", ".webm"},
-    "documentos": {".pdf", ".docx", ".doc", ".txt", ".xlsx", ".pptx", ".csv"},
+    "Fotos": {".jpg", ".jpeg", ".png", ".gif", ".webp", ".heic"},
+    "Videos": {".mp4", ".mov", ".avi", ".mkv", ".webm"},
+    "Documentos": {".pdf", ".docx", ".doc", ".txt", ".xlsx", ".pptx", ".csv"},
 }
 
 
@@ -21,6 +22,9 @@ def carpeta_para(archivo):
 
 
 def main():
+    if not CARPETA_LOCAL.is_dir():
+        CARPETA_LOCAL.mkdir()
+        raise SystemExit(f"Cree la carpeta {CARPETA_LOCAL}: pon ahi tus fotos, videos y documentos.")
     archivos = [a for a in sorted(CARPETA_LOCAL.iterdir()) if a.is_file()]
     if not archivos:
         raise SystemExit(f"Pon primero tus archivos en: {CARPETA_LOCAL}")

@@ -1,0 +1,54 @@
+Clave leída de clave.txt
+Conectado a la base 'RedSocial', contenedor 'Mensajes'.
+
+Agregando mensajes de ejemplo...
+  Guardado msg-001 de usuario-ana
+  Guardado msg-002 de usuario-ana
+  Guardado msg-003 de usuario-carlos
+  Guardado msg-004 de usuario-carlos
+  Guardado msg-005 de usuario-diego
+  Guardado msg-006 de usuario-diego
+  Guardado msg-007 de usuario-laura
+  Guardado msg-008 de usuario-laura
+Listo: 8 mensajes en el contenedor.
+
+Mensaje nuevo con la fecha-hora actual: msg-20261126195823002192 (2026-11-26T19:58:23Z)
+
+=== Todos los mensajes (10) ===
+  [2026-11-20T08:15:00Z] usuario-ana: ¡Buenos días a todos! Arrancando la semana.  (https://ejemplo.com/ana/cafe.jpg)
+  [2026-11-21T10:05:00Z] usuario-carlos: Alguien tiene los apuntes de Azure?  (https://ejemplo.com/carlos/apuntes)
+  [2026-11-21T19:40:00Z] usuario-ana: Terminé el proyecto de bases de datos 🎉  (https://ejemplo.com/ana/proyecto)
+  [2026-11-22T22:10:00Z] usuario-diego: Mi carro con ESP32 ya esquiva obstáculos solo  (https://ejemplo.com/diego/carro.mp4)
+  [2026-11-23T14:30:00Z] usuario-carlos: Partido de fútbol hoy a las 5  (https://ejemplo.com/carlos/futbol.png)
+  [2026-11-24T09:00:00Z] usuario-diego: Aprendiendo Cosmos DB con Python  (https://ejemplo.com/diego/cosmos)
+  [2026-11-24T16:45:00Z] usuario-laura: Nueva foto del atardecer  (https://ejemplo.com/laura/atardecer.jpg)
+  [2026-11-25T11:20:00Z] usuario-laura: ¿Qué es JSON? Pregunta para el parcial  (https://ejemplo.com/laura/json)
+  [2026-11-26T19:58:08Z] usuario-diego: Mensaje enviado desde Python ahora mismo  (https://ejemplo.com/diego/python)
+  [2026-11-26T19:58:23Z] usuario-diego: Mensaje enviado desde Python ahora mismo  (https://ejemplo.com/diego/python)
+
+=== Mensajes de usuario-ana (2) ===
+  [2026-11-20T08:15:00Z] usuario-ana: ¡Buenos días a todos! Arrancando la semana.  (https://ejemplo.com/ana/cafe.jpg)
+  [2026-11-21T19:40:00Z] usuario-ana: Terminé el proyecto de bases de datos 🎉  (https://ejemplo.com/ana/proyecto)
+
+=== Mensajes del 21 de noviembre de 2026 (2) ===
+  [2026-11-21T10:05:00Z] usuario-carlos: Alguien tiene los apuntes de Azure?  (https://ejemplo.com/carlos/apuntes)
+  [2026-11-21T19:40:00Z] usuario-ana: Terminé el proyecto de bases de datos 🎉  (https://ejemplo.com/ana/proyecto)
+
+=== Mensajes entre el 22 y el 24 de noviembre (sin incluir el 25) (4) ===
+  [2026-11-22T22:10:00Z] usuario-diego: Mi carro con ESP32 ya esquiva obstáculos solo  (https://ejemplo.com/diego/carro.mp4)
+  [2026-11-23T14:30:00Z] usuario-carlos: Partido de fútbol hoy a las 5  (https://ejemplo.com/carlos/futbol.png)
+  [2026-11-24T09:00:00Z] usuario-diego: Aprendiendo Cosmos DB con Python  (https://ejemplo.com/diego/cosmos)
+  [2026-11-24T16:45:00Z] usuario-laura: Nueva foto del atardecer  (https://ejemplo.com/laura/atardecer.jpg)
+
+=== Mensajes de usuario-carlos desde el 22 de noviembre (1) ===
+  [2026-11-23T14:30:00Z] usuario-carlos: Partido de fútbol hoy a las 5  (https://ejemplo.com/carlos/futbol.png)
+
+=== Mensajes que mencionan 'azure' (1) ===
+  [2026-11-21T10:05:00Z] usuario-carlos: Alguien tiene los apuntes de Azure?  (https://ejemplo.com/carlos/apuntes)
+
+=== Cantidad de mensajes por usuario (4) ===
+  {'idUsuario': 'usuario-ana', 'total': 2}
+  {'idUsuario': 'usuario-carlos', 'total': 2}
+  {'idUsuario': 'usuario-diego', 'total': 4}
+  {'idUsuario': 'usuario-laura', 'total': 2}
+

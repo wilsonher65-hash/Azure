@@ -1,0 +1,7 @@
+# Entorno virtual de Python
+.venv/
+__pycache__/
+
+# NUNCA subir la clave de Cosmos DB
+.env
+clave.txt

@@ -7,6 +7,11 @@ Actividades del curso de Azure, hechas con una cuenta **Azure for Students**.
 | 1 | Calculadora de interés simple publicada en la web | **Static Web Apps** | [`index.html`](index.html) |
 | 2 | Blobs, archivos, tablas y colas | **Storage** (cuenta de almacenamiento) | [`taller-azure/`](taller-azure/) |
 | 3 | Base de datos **RedSocial** con mensajes | **Cosmos DB** (NoSQL) | [`taller-cosmosdb/`](taller-cosmosdb/) |
+<img width="1913" height="957" alt="image" src="https://github.com/user-attachments/assets/9d1bddb6-30a1-4b0b-8206-4de09542af5f" />
+
+
+<img width="1916" height="954" alt="image" src="https://github.com/user-attachments/assets/d28f0789-569a-4768-8d35-b0ecd880da9d" />
+
 
 ---
 
